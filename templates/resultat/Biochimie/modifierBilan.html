@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}   
+    {% load static %}
+    
+    
+</head>
+
+<body style="background: url(&quot;{% static 'img/patients.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+   
+<div id="wrapper">
+    {% for group in  request.user.groups.all %}
+    {%  if 'Medecin' == group.name %}
+         {% include 'medecin/navbar_Medecin.html' %}
+       {% else %}
+           {%  if 'Biologiste' == group.name %}
+                  {% include 'biologiste/navbar_biologiste.html' %}
+                {% else %}
+                    {%  if 'Receptionniste' == group.name %}
+                        {% include 'receptionniste/navbar_reception.html' %}    
+                    {% else %}
+                       {% if 'Administrateur' == group.name %}
+                          {% include 'administrateur/include_admin.html' %}  
+                        
+                       {% endif %}      
+                    {% endif %}
+            {% endif %}
+    {% endif %}                
+    {% endfor %} 
+    
+        <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: black;"></i></a>
+
+           
+            <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                        <form class="custom-form" method="POST" style="margin-top: 0px;background-color: rgba(0,0,0,0.05);">
+                            {% csrf_token %} 
+                            <h1 style="color: black;"> modifier Résultat Bilan Durgence</h1>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">ID demande</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.id_demande}}
+                                </div>
+                            </div>
+     
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Taux_pro</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.Taux_pro}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">INR</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.INR}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Temp_cépha </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.Temp_cépha}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Glucose </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.Glucose}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Urée </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.Urée}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> créatinine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.créatinine}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Bilirubine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.Bilirubine}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Calcium </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.Calcium}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> CRP </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.CRP}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> WBC </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.WBC}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> RBC </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.RBC}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> HGB </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.HGB}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> HCT </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.HCT}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> MCV </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.MCV}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> MCH </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.MCH}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> MCHC </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.MCHC}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> PLT </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.PLT}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> LYM </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    {{form.LYM}}
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> NEUT </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                   {{form.NEUT}}
+                                </div>
+                            </div> 
+                           
+                            
+                            <div class="d-flex justify-content-center h-100">
+                                  <button class="btn btn-primary submit-button" style="color:blue;" type="submit">Modifier</button>
+                            </div>
+                 </form>
+                            
+  
+                </div>
+           
+               </div>
+        </div>
+</div>
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+</body>
+
+</html>

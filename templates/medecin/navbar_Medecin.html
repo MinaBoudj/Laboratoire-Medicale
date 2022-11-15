@@ -1,0 +1,13 @@
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+    <li class="nav-item" role="presentation"></li><a class="nav-link" href="">CHU DOUERA</a></li>
+    <a  href="{% url 'profile' %}"><i class="fa fa-user fa-fw" aria-hidden="true" ></i>&nbsp; Profile</a>
+    <a  href="{% url 'ajouterPatient' %}"><i class="fa fa-user-plus fa-fw" aria-hidden="true" ></i>&nbsp; +Patient</a>
+    <a  href="{% url 'listePatient' %}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Liste Patient</a>
+    <a  href="{% url 'listeDemande' %}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Liste Demande Analyse</a>
+    
+    <a  href="{% url 'Resultats' %}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp; Résultat Analyse</a>
+    <a  href="{% url 'Statistique-Afficher' %}"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Statéstique</a>
+    <a  href="{% url 'Deconnexion' %}"><i class="fa fa-sign-out-alt fa-fw" aria-hidden="true"></i>&nbsp; Se Déconnecter</a>
+  </ul>
+</div>

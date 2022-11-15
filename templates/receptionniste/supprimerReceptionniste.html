@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+
+    <style>
+        .card-body{
+            text-align: center;
+        }
+    </style>
+    
+</head>
+
+<body style="background-image: url(&quot;{% static 'img/star-sky.jpg' %}&quot;);">
+    
+    {% include 'administrateur/navbar_administrateur.html' %}
+    <div id="wrapper">
+        {% include 'administrateur/include_admin.html' %}
+        <div class="page-content-wrapper">
+            <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: white;"></i></a>
+                <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                           <div class="card mt-5">
+                                      <div class="card-body">
+                                          <p>Voulez-vous supprimer ce Receptionniste?</p>
+                                          <form action="{% url 'supprimerReceptionniste' item.id item.email %}" method="post">
+                                               {% csrf_token %}
+                                               <a class="btn btn-warning" href="{% url 'listeReceptionniste' %}">Annuler</a>
+                                               <input class="btn btn-danger" type="submit" name="confirmer">
+                                          </form>
+                                      </div>
+                           </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>         
+</body>
+</html>

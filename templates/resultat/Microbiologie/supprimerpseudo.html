@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+    <style>
+        .card-body{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body style="background-image: url(&quot;{% static 'img/star-sky.jpg' %}&quot;);">
+    
+    
+    <div id="wrapper">
+        {% for group in  request.user.groups.all %}
+    {%  if 'Medecin' == group.name %}
+         {% include 'medecin/navbar_Medecin.html' %}
+       {% else %}
+           {%  if 'Biologiste' == group.name %}
+                  {% include 'biologiste/navbar_biologiste.html' %}
+                {% else %}
+                    {%  if 'Receptionniste' == group.name %}
+                        {% include 'receptionniste/navbar_reception.html' %}    
+                    {% else %}
+                       {% if 'Administrateur' == group.name %}
+                          {% include 'administrateur/include_admin.html' %}  
+                        
+                       {% endif %}      
+                    {% endif %}
+            {% endif %}
+    {% endif %}                
+    {% endfor %} 
+   
+        <div class="page-content-wrapper">
+            <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: white;"></i></a>
+                <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                           <div class="card mt-5">
+                                      <div class="card-body">
+                                          <p>Voulez-vous supprimer le resultat de Pseudomonas ?</p>
+                                          <form action="{% url 'supprimerPseudomonas' item.id  %}" method="post">
+                                               {% csrf_token %}
+                                               <a class="btn btn-warning" href="{% url 'listePseudomonas' %}">Annuler</a>
+                                               <input class="btn btn-danger" type="submit" name="confirmer">
+                                          </form>
+                                      </div>
+                           </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>         
+</body>
+</html>

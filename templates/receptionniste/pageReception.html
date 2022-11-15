@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   {% include 'connexion/include.html' %}
+   {% load static %}
+</head>
+
+
+<body style="background: url(&quot;{% static 'img/receptionniste.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+    {% include 'administrateur/navbar_administrateur.html' %}
+    
+    <div id="wrapper">
+       {% include 'receptionniste/navbar_reception.html' %}
+        <div class="page-content-wrapper">
+            <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars"></i></a>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                             <h1 class="text-center" style="color:white" >Bienvenu dans votre espace Le Receptionniste {{request.user}}..</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/back-to-top-scroll.js' %}"></script>
+    <script src="{% static 'assets/js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+    <script src="{% static 'assets/js/bs-init.js' %}"></script>
+    <script src="{% static 'assets/js/Sidebar-Menu.js' %}"></script>
+</body>
+
+</html>

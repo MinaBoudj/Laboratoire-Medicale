@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}   
+    {% load static %}
+</head>
+
+<body style="background-image: url(&quot;{% static 'img/star-sky.jpg' %}&quot;);">
+    
+    {% include 'administrateur/navbar_administrateur.html' %}
+    
+    <div id="wrapper">
+        
+
+             {% include 'administrateur/include_admin.html' %}
+                              
+           <div class="page-content-wrapper">
+               <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: white;"></i></a>
+                <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                           <div class="card mt-5">
+                                      <div class="card-body">
+                                       <form class="custom-form" method="POST" style="margin-top: 0px;background-color: rgba(0,0,0,0.05);">
+                                        <h1 style="color: black;">Modifier Données Biologiste</h1>
+                                        {% csrf_token %}
+                                        <div class="form-row form-group">
+                                            <div class="col-sm-4 label-column">
+                                                <label class="col-form-label" style="color: black;" for="name-input-field">Nom </label>
+                                            </div>
+                                            <div class="col-sm-6 input-column">
+                                                {{formBiologiste.nom}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row form-group">
+                                            <div class="col-sm-4 label-column">
+                                                <label class="col-form-label" style="color: black;" for="name-input-field">Prénom </label>
+                                            </div>
+                                            <div class="col-sm-6 input-column">
+                                                {{formBiologiste.prenom}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row form-group">
+                                            <div class="col-sm-4 label-column">
+                                                <label class="col-form-label" style="color: black;" for="name-input-field">Email </label>
+                                            </div>
+                                            <div class="col-sm-6 input-column">
+                                                {{formBiologiste.email}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row form-group">
+                                            <div class="col-sm-4 label-column">
+                                                <label class="col-form-label" style="color: black;" for="name-input-field">Numéro Télepone</label>
+                                            </div>
+                                            <div class="col-sm-6 input-column">
+                                                {{formBiologiste.numTel}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row form-group">
+                                            <div class="col-sm-4 label-column">
+                                                <label class="col-form-label" style="color: black;" for="name-input-field">Adresse</label>
+                                            </div>
+                                            <div class="col-sm-6 input-column">
+                                                {{formBiologiste.adresse}}
+                                            </div>
+                                        </div>
+                                        
+                                                                                
+                                        <div class="form-row form-group">
+                                            <div class="col-sm-4 label-column">
+                                                <label class="col-form-label" style="color: black;" for="name-input-field">Sexe </label>
+                                            </div>
+                                            <div class="col-sm-6 input-column">
+                                                {{formBiologiste.genre}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row form-group">
+                                            <div class="col-sm-4 label-column">
+                                                <label class="col-form-label" style="color: black;" for="name-input-field">Date de Naissance </label>
+                                            </div>
+                                            <div class="col-sm-6 input-column">
+                                                {{formBiologiste.dateNaissance}}
+                                            </div>
+                                        </div>
+                                         
+                                        <button class="btn btn-primary" type="submit"> Modifier</button>
+                                       </form>
+                                      </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+</body>
+
+</html>

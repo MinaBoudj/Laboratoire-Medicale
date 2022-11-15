@@ -1,0 +1,50 @@
+input:not([type=submit]):invalid {
+    background-color: #ffdddd;
+    border-color:red
+}
+
+input:not([type=submit]):valid {
+    background-color: #ddffdd;
+    border-color:#ddffdd
+}
+
+input:not([type=submit]):invalid:required {
+    background: #ffdddd url('http://www.developerdrive.com/wp-content/uploads/2013/08/asterisk1.png') no-repeat right top;
+    border-color:red
+}
+
+input:not([type=submit]):valid:required {
+    background: #ddffdd url('http://www.developerdrive.com/wp-content/uploads/2013/08/asterisk1.png') no-repeat right top;
+    border-color:#ddffdd
+}
+
+input:not([type=submit]):optional {
+    background-color: #add1ef;
+
+}
+
+.validation01 {
+  background: red;
+  color: #fff;
+  display: none;
+  font-size: 12px;
+  padding: 3px;
+  position: absolute;
+  right: -110px;
+  text-align: center;
+  top: 0;
+  width: 100px;
+}
+input:focus + .validation01 {
+  display: block;
+}
+input:focus:required:valid + .validation01 {
+  background: green;
+}
+input:focus:required:valid + .validation01 .invalid {
+  display: none;
+}
+input:focus:required:invalid + .validation01 .valid {
+  display: none;
+}
+

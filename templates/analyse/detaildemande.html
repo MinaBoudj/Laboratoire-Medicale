@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}   
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styleDemande.css' %}">
+</head>
+
+<body style="background: url(&quot;{% static 'img/patients.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+
+    <div id="wrapper"> 
+        {% for group in  request.user.groups.all %}
+        {%  if 'Medecin' == group.name %}
+             {% include 'medecin/navbar_Medecin.html' %}
+           {% else %}
+               {%  if 'Biologiste' == group.name %}
+                      {% include 'biologiste/navbar_biologiste.html' %}
+                    {% else %}
+                        {%  if 'Receptionniste' == group.name %}
+                            {% include 'receptionniste/navbar_reception.html' %}    
+                        {% else %}
+                           {% if 'Administrateur' == group.name %}
+                              {% include 'administrateur/include_admin.html' %}  
+                            
+                           {% endif %}      
+                        {% endif %}
+                {% endif %}
+        {% endif %}                
+        {% endfor %} 
+      
+          <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: black;"></i></a>
+           
+            <div class="row register-form">
+              <div class="col-md-8 offset-md-2" >                 
+      
+                <form class="custom-form"  method="post" style="margin-top: 0px;background-color: rgba(0,0,0,0.05);">
+                  {% csrf_token %} 
+                  <h1 style="color: black;">Demande analyse N° <input readonly type="number" value="{{demande.id}}"></h1>
+   
+                  
+                      <div class="user-details">
+
+                            <div class="input-box">
+                             
+                              <span class="details" style="color: black;">Nom Médecin demandeur</span>
+                              <input class="form-control" type="text" readonly value="{{demande.Nommedecin_demandeur}}" >
+                                                        
+                            </div>
+
+                            <div class="input-box">
+                              <span class="details" style="color: black;">Prénom Médecin demandeur</span>
+                              <input class="form-control" type="text" readonly value="{{demande.Prenommedecin_demandeur}}" >
+                           </div>
+                          
+                           <div class="input-box">
+                               <span class="details" style="color: black;">Nom Service</span>
+                               <input class="form-control"  readonly value="{{demande.service}}" >
+                           </div>
+
+                           <div class="input-box">
+                            <span class="details" style="color: black;">Nembre Prelevement</span>
+                            {{form.nb_prelevement}}
+                           </div>
+                      </div>
+                      <div class="text-center" role="tablist" id="accordion-1">
+                            <span class="details" style="color: black;">Tout Les Prélevements</span>
+                            {% for i in liste_prelevement %}                           
+                            <ul class = "collapsible popout text-center" data-collapsible = "accordion">
+                                <li class="card">
+                                    <div class = "card-header collapsible-header">
+                                        <h5 style="color:blue;"><i class="fa fa-calendar-check-o"></i>  prelevement {{ i.nature_prelevement }} Type:  {{i.type_tube}}</h5>
+                                    </div>
+                                   
+                                </li>
+                            </ul>
+                            {% endfor %}
+
+                     </div>                           
+                     
+
+                         <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="col-form-label" style="color: black;" for="name-input-field">Analyse Biochimie </label>
+                            </div>
+                            <div class="col-sm-6 input-column">
+                                {{form.Biochimie}}
+                            </div>
+                        </div>
+                         
+                        <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="col-form-label" style="color: black;" for="name-input-field">Analyse Parasitologie</label>
+                            </div>
+                            <div class="col-sm-6 input-column">
+                                {{form.Parasitologie}}
+                            </div>
+                        </div>
+                         
+                                                    
+                        <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="col-form-label" style="color: black;" for="name-input-field">Analyse Microbiologie</label>
+                            </div>
+                            <div class="col-sm-6 input-column">
+                                {{form.Microbiologie}}
+                            </div>
+                        </div>
+                         
+                        <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="col-form-label" style="color: black;" for="name-input-field">Analyse Hémobiologie</label>
+                            </div>
+                            <div class="col-sm-6 input-column">
+                                {{form.Hémobiologie}}
+                            </div>
+                        </div>                         
+                     <br><br><br>
+                     <div class="user-details">
+
+                        <div class="input-box">
+                            <a class='btn btn-info' href="{% url 'listeDemande' %}">Revenir</a>
+                            <a class='btn btn-info' href="{% url 'consulterResultat' demande.id %}">Consulter Les Résultats</a>
+                        </div>
+                          
+                        
+                      
+                           
+                       
+                         
+                        
+                </form>
+              
+                  </div>    
+            </div>
+           </div>
+    
+</div>
+
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+</body>
+
+</html>

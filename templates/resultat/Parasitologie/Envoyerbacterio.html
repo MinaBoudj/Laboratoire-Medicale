@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+      <link rel="stylesheet" href="  {% static 'css/envoie.css' %}"/>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+
+
+</head>
+
+<div class="row">
+    <div class="col-md-12" >
+        <div class="card" id="invoice">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h3 class="invoice-color text-center mb-2 mt-md-2">Laboratoire CHU DOUERA</h3>
+            </div>
+                <h4><input id="date-picker"></h4>
+            <div class="card-body ">
+                <div class="col-sm-6">
+                    <div class="mb-4 pull-left">
+                        <h6 class="card-title text-primary">Informations date: </h6>
+                        <ul class="list list-unstyled mb-0 text-left">
+                            <li>Date Demande Analyse :  {{demande.date_ajout_demande}}</li>
+                            <li>Date Resultat:   {{bac.date_ajout_resultat}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <ul class="list list-unstyled mb-0 ">
+                        <li><h5 class="my-2">Nom : {{ demande.nomPatient }}</h5></li>
+                        <li><h5 class="my-2">Prenom : {{ demande.prenomPatient }}</h5></li>
+                        <li><h5 class="my-2">Age : {{ demande.age }} ans</h5></li>
+
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                         <span class="text-muted text-center">
+                                    <h4 class="my-2 " style="color:pink">Resultat Bacteriologie :</h4></span>
+                    <div class="table-responsive">
+                         <table class="table table-lg" border="1">
+                            <thead>
+                            <tr>
+                                <th>Analyse</th>
+                                <th>Resultat</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Reference
+                                </td>
+                                <td>{{ bac.Reference }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Cytologie
+                                </td>
+                                <td>{{ bac.Cytologie }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Culture
+                                </td>
+                                <td>{{ bac.Culture}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="mb-4 mb-md-2 text-left"><span class="text-muted">
+                                <h5 class="my-2">Demandeur:</h5></span>
+                    <ul class="list list-unstyled mb-0">
+                        <li><h6 class="my-2">le Medecin </h6></li>
+                        <li><h5 class="my-2">{{demande.Nommedecin_demandeur}}
+                            {{demande.Prenommedecin_demandeur}}</h5></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+</div>
+<script type="text/javascript">
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+document.getElementById("date-picker").value = today;
+</script>
+
+</body>
+
+</html>

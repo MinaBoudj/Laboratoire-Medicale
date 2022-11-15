@@ -1,0 +1,13 @@
+.table-dark {
+  color: #fff;
+  background-color: #663300;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th {
+  color:#fff;
+  background:#663300;
+  border-color: #FF860D;
+}
+

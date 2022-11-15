@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+</head>
+<body style="background: url(&quot;{% static 'img/amin1.jpg' %}&quot;)
+no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+background-size: cover;o-background-size: cover;">
+
+{% include 'administrateur/navbar_administrateur.html' %}
+    <div id="wrapper">
+        {% include 'administrateur/include_admin.html' %}
+        <div class="page-content-wrapper">
+             {% csrf_token %}
+                <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: white;"></i></a>
+                <h2 class="text-center" style="color: black;">Bienvenu dans votre espace!</h2><br>
+                <h1 class="text-center" style="color: black;">Vous êtes bien connecté..{{ user.username }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+<!--<script src="{% static 'js/jquery.min.js' %}"></script>-->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+   
+
+
+</body>
+</html>

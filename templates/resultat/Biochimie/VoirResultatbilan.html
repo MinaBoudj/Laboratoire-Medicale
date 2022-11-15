@@ -1,0 +1,259 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+
+
+</head>
+
+<body style="background: url(&quot;{% static 'img/patients.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+
+<div id="wrapper">
+    {% for group in  request.user.groups.all %}
+    {%  if 'Medecin' == group.name %}
+         {% include 'medecin/navbar_Medecin.html' %}
+       {% else %}
+           {%  if 'Biologiste' == group.name %}
+                  {% include 'biologiste/navbar_biologiste.html' %}
+                {% else %}
+                    {%  if 'Receptionniste' == group.name %}
+                        {% include 'receptionniste/navbar_reception.html' %}
+                    {% else %}
+                       {% if 'Administrateur' == group.name %}
+                          {% include 'administrateur/include_admin.html' %}
+
+                       {% endif %}
+                    {% endif %}
+            {% endif %}
+    {% endif %}
+    {% endfor %}
+
+        <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: black;"></i></a>
+
+
+            <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                        <form class="custom-form" method="post" style="margin-top: 0px;background-color: rgba(0,0,0,0.05);">
+                            {% csrf_token %}
+                            <h1 style="color: black;">Résultat Bilan Durenge</h1>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Nom Patient</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{demande.nomPatient}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Prénom Patient</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{demande.prenomPatient}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="email-input-field" style="color: black;">Age </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="number" value="{{demande.age}}" readonly>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Taux_pro</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"   value="{{bilan.Taux_pro}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">INR</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"   value="{{bilan.INR}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Temp_cépha </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"    value="{{bilan.Temp_cépha}}" readonly >
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Glucose </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"   value="{{bilan.Glucose}}" readonly >
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Urée </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"    value="{{bilan.Urée}}" readonly  >
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> créatinine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"    value="{{bilan.créatinine}}" readonly >
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Bilirubine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"    value="{{bilan.Bilirubine}}" readonly  name="Bilirubine">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Calcium </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"     value="{{bilan.Calcium}}" readonly  name="Calcium">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> CRP </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"   value="{{bilan.CRP}}" readonly  name="CRP">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> WBC </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"     value="{{bilan.WBC}}" readonly  name="WBC">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> RBC </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"     value="{{bilan.RBC}}" readonly  name="RBC">
+                                    <input class="form-control"     value="{{bilan.RBC}}" readonly  name="RBC">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> HGB </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"   value="{{bilan.HGB}}" readonly  name="HGB">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> HCT </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"     value="{{bilan.HCT}}" readonly  name="HCT">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> MCV </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"     value="{{bilan.MCV}}" readonly  name="MCV">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> MCH </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"    value="{{bilan.MCH}}" readonly  name="MCH">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> MCHC </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"     value="{{bilan.MCHC}}" readonly  name="MCHC">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> PLT </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"    value="{{bilan.PLT}}" readonly  name="PLT">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> LYM </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"  value="{{bilan.LYM}}" readonly  name="LYM">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> NEUT </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control"    value="{{bilan.NEUT}}" readonly  name="NEUT">
+                                </div>
+                            </div>
+
+                            <a class="btn btn-primary  btn-lg" href="{% url 'AfficherResultatBilanDurgence' bilan.id  %}" ><i class="fa fa-download"></i> </span>
+                                <span class="fa fa-send"  style="color:#4f4;"></span>     <span class="fa fa-print"></span></a>
+
+
+                 </form>
+
+
+                </div>
+
+               </div>
+        </div>
+</div>
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+{% ifequal error "no" %}
+<script type="text/javascript">
+    alert('Resultat ajouter avec succer..........')
+    window.location = ('{% url 'listeBilanDurgence' %}')
+</script>
+{% endifequal%}
+
+{% ifequal error "yes" %}
+<script type="text/javascript">
+    /*alert('{{e}}')*/
+    alert('Erreur dans les informations....')
+</script>
+{% endifequal%}
+
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+</body>
+
+</html>

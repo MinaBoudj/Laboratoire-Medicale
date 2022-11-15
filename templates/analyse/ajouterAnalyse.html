@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}   
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styleDemande.css' %}">
+</head>
+
+<body style="background: url(&quot;{% static 'img/patients.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+
+    <div id="wrapper"> 
+      {% for group in  request.user.groups.all %}
+      {%  if 'Medecin' == group.name %}
+           {% include 'medecin/navbar_Medecin.html' %}
+         {% else %}
+             {%  if 'Biologiste' == group.name %}
+                    {% include 'biologiste/navbar_biologiste.html' %}
+                  {% else %}
+                      {%  if 'Receptionniste' == group.name %}
+                          {% include 'receptionniste/navbar_reception.html' %}    
+                      {% else %}
+                         {% if 'Administrateur' == group.name %}
+                            {% include 'administrateur/include_admin.html' %}  
+                          
+                         {% endif %}      
+                      {% endif %}
+              {% endif %}
+      {% endif %}                
+      {% endfor %} 
+   
+          <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: black;"></i></a>
+           
+            <div class="row register-form">
+              <div class="col-md-8 offset-md-2" >                 
+      
+                <form class="custom-form"  method="post" style="margin-top: 0px;background-color: rgba(0,0,0,0.05);">
+                  {% csrf_token %} 
+                  <h1 style="color: black;">Demande Analyse du Patient N° <input readonly type="number" value="{{patient.id}}" name="idPatient"></h1>
+   
+                  
+                      <div class="user-details">
+
+                            <div class="input-box">
+                             
+                              <span class="details" style="color: black;">Nom Patient</span>
+                              <input class="form-control" type="text" readonly value="{{patient.nom}}" name="nomPatient">
+                                                        
+                            </div>
+
+                            <div class="input-box">
+                              <span class="details" style="color: black;">Prénom Patient</span>
+                              <input class="form-control" type="text" readonly value="{{patient.prenom}}" name="prenomPatient">
+                           </div>
+                           <div class="input-box">
+                            <span class="details" style="color: black;">Nom Service</span>
+                            {{form.service}}
+                          </div>
+
+                          
+                           <div class="input-box">
+                            <span class="details" style="color: black;">Age Patient</span>
+                            <input class="form-control" type="number" name="age" id="date-picker" readonly>
+                          </div>
+
+                           <div class="input-box">
+                              <span class="details" style="color: black;">Nom Médecin</span>
+                              {{form.Nommedecin_demandeur}}
+                          </div>
+
+                          <div class="input-box">
+                              <span class="details" style="color: black;">Prénom Médecin</span>
+                              {{form.Prenommedecin_demandeur}}
+                          </div> 
+
+                          <div class="input-box">
+                            <span class="details" style="color: black;">nembre de prelevement</span>
+                            {{form.nb_prelevement}}
+                        </div>     
+                        <div class="input-box">
+                          
+                      </div>                                                
+                                                                   
+                          
+                          <div class="input-box">                         
+                            <span class="details" style="color: black;">Type Prèlèvement 1</span>
+                            
+                              <select class="form-control" maxlength="200" name="nature_prelevement1">
+                                      <option value="Aucun" selected="">Aucun</option>
+                                      <option value="Sang" >Sang</option>
+                                      <option value="Urine">Urine</option>
+                                      <option value="LCR">LCR</option>
+                                      <option value="Aisselle">Aisselle</option>
+                                      <option value="Pus">Pus</option>
+                                    
+                              </select>
+                          
+                         </div> 
+                         
+                         <div class="input-box">
+                                 <span class="details" style="color: black;">Type Tube 1</span>
+                                 
+                                  <select class="form-control" maxlength="200" name="type_tube1">
+                                      
+                                        <option value="Aucun" selected="">Aucun</option>
+                                          <option value="Sec" >Sec</option>
+                                          <option value="EDTA">EDTA</option>
+                                          <option value="Citrate">Citrate</option>
+                                          <option value="Hiparine">Hiparine</option>
+                                          
+                                      
+                                  </select>
+                              
+                         </div>
+                         
+                         <div class="input-box">                         
+                          <span class="details" style="color: black;">Type Prèlèvement 2</span>
+                          
+                            <select class="form-control" maxlength="200" name="nature_prelevement2">
+                              <optgroup label="Choisir le sexe">
+                                <option value="Aucun" selected="">Aucun</option>
+                                <option value="Sang" >Sang</option>
+                                <option value="Urine">Urine</option>
+                                <option value="LCR">LCR</option>
+                                <option value="Aisselle">Aisselle</option>
+                                <option value="Pus">Pus</option>
+
+                              
+                            </select>
+                        </div>
+                       
+                       
+                       <div class="input-box">
+                               <span class="details" style="color: black;">Type Tube 2</span>
+                               
+                                <select class="form-control" maxlength="200" name="type_tube2">
+                                  
+                                    <option value="Aucun" selected="">Aucun</option>
+                                    <option value="Sec" >Sec</option>
+                                    <option value="EDTA">EDTA</option>
+                                    <option value="Citrate">Citrate</option>
+                                    <option value="Hiparine">Hiparine</option>
+                                    
+                                
+                                </select>
+                            
+                        </div>
+                       <div class="input-box">                         
+                        <span class="details" style="color: black;">Type Prèlèvement 3</span>
+                        
+                          <select class="form-control" maxlength="200" name="nature_prelevement3">
+                            <optgroup label="Choisir le sexe">
+                              <option value="Aucun" selected="">Aucun</option>
+                              <option value="Sang" >Sang</option>
+                              <option value="Urine">Urine</option>
+                              <option value="LCR">LCR</option>
+                              <option value="Aisselle">Aisselle</option>
+                              <option value="Pus">Pus</option>
+
+                            
+                          </select>
+                     
+                     </div> 
+                     
+                     <div class="input-box">
+                             <span class="details" style="color: black;">Type Tube 3</span>
+                             
+                              <select class="form-control"  maxlength="200" name="type_tube3">
+                                
+                                  <option value="Aucun" selected="">Aucun</option>
+                                  <option value="Sec" >Sec</option>
+                                  <option value="EDTA">EDTA</option>
+                                  <option value="Citrate">Citrate</option>
+                                  <option value="Hiparine">Hiparine</option>
+                                  
+                              
+                              </select>
+                         
+                     </div>
+                     <div class="input-box">                         
+                      <span class="details" style="color: black;">Type Prèlèvement 4</span>
+                      
+                        <select class="form-control" maxlength="200" name="nature_prelevement4">
+                          <optgroup label="Choisir le sexe">
+                            <option value="Aucun" selected="">Aucun</option>
+                            <option value="Sang" >Sang</option>
+                            <option value="Urine">Urine</option>
+                            <option value="LCR">LCR</option>
+                            <option value="Aisselle">Aisselle</option>
+                            <option value="Pus">Pus</option>
+
+                          
+                        </select>
+                    
+                   </div> 
+                   
+                   <div class="input-box">
+                           <span class="details" style="color: black;">Type Tube 4</span>
+                           
+                            <select class="form-control"  maxlength="200" name="type_tube4">
+                              
+                                <option value="Aucun" selected="">Aucun</option>
+                                <option value="Sec" >Sec</option>
+                                <option value="EDTA">EDTA</option>
+                                <option value="Citrate">Citrate</option>
+                                <option value="Hiparine">Hiparine</option>
+                                
+                            
+                            </select>
+                      
+                   </div>
+                     
+                          
+                        </div> 
+                         <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                              <label class="col-form-label" style="color: black;" for="name-input-field">Analyse Biochimie </label>
+                            </div>
+                            
+                                 {{form.Biochimie}}
+                            
+                         </div>
+
+                      
+                         <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="col-form-label" style="color: black;" for="name-input-field">Parasitologie</label>
+                            </div>
+                            
+                                    {{form.Parasitologie}}
+                           
+                         </div>
+
+                         <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                                 <label class="col-form-label" style="color: black;" for="name-input-field">Analyse Microbiologie</label>
+                            </div>
+                            
+                                 {{form.Microbiologie}}
+                            
+                         </div>
+
+                         <div class="form-row form-group">
+                            <div class="col-sm-4 label-column">
+                              <label class="col-form-label" style="color: black;" for="name-input-field">Analyse Hémobiologie </label>
+                            </div>
+                            
+                                 {{form.Hémobiologie}}
+                           
+                         </div>
+
+                         <div class="button">
+                              <input type="submit" value="Enregistrer">
+                         </div> 
+                        
+                </form>
+              
+                  </div>    
+            </div>
+           </div>
+    
+</div>
+
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+{% ifequal error "no" %}
+<script type="text/javascript">
+alert('Appointment Booked Sucessfully..........')
+window.location = ('{% url 'listeDemande' %}')
+</script>
+{% endifequal%}
+
+{% ifequal error "yes" %}
+<script type="text/javascript">
+/*alert('{{e}}')*/
+alert('Erreur dans les informations fournis....')
+</script>
+{% endifequal%}
+
+{% ifequal erreurNb "no" %}
+<script type="text/javascript">
+alert('Demande Ajouter avec succes..........')
+window.location = ('{% url 'listeDemande' %}')
+</script>
+{% endifequal%}
+
+{% ifequal erreurNb "yes" %}
+<script type="text/javascript">
+/*alert('{{e}}')*/
+alert('Le nembre de prelevement ne correspond pas au camps remplis pour la nature et le type du prelevement....')
+</script>
+{% endifequal%}
+
+<script type="text/javascript">
+var date = new Date();
+var year =date.getFullYear();
+var day= String(date.getDate()).padStart(2,'0');
+var mont = date.getMonth()+1;
+var yearB= "{{patient.dateNaissance.year}}";
+var montB = "{{patient.dateNaissance.month}}";
+var dayB = "{{patient.dateNaissance.day}}";
+var age = year - yearB - ((mont, day) < (montB, dayB))
+document.getElementById("date-picker").value = age; 
+
+</script>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+</body>
+
+</html>

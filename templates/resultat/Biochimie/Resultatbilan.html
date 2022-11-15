@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="  {% static 'css/pdf.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/stylemedia.css' %}"/>
+
+</head>
+<body style="background: url(&quot;{% static 'img/result.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+<div class="row">
+    <div class="col-md-12" id="dummy_content">
+        <div class="card  border border-danger mb-3" id="invoice">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h4 class="invoice-color text-center mb-2 mt-md-2">Laboratoire CHU DOUERA</h4>
+                <h4><input id="date-picker" readonly></h4>
+            </div>
+            <div class="card-body ">
+                <div class="col-sm-6">
+                    <div class="mb-4 pull-left">
+                        <h6 class="card-title text-primary">Informations date: </h6>
+
+                        <ul class="list list-unstyled mb-0 text-left">
+                            <li>Date Demande Analyse</li>
+                            <li>Date Resultat</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-4 ">
+                        <div class="text-sm-right">
+                            <h6 class="card-title text-center text-primary">voila: </h6>
+
+                            <ul class="list list-unstyled mb-0">
+
+                                <li>Date: <span
+                                        class="font-weight-semibold">{{demande.date_ajout_demande}}</span>
+                                </li>
+                                <li>Due date: <span
+                                        class="font-weight-semibold">{{bilan.date_ajout_resultat}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <ul class="list list-unstyled mb-0 ">
+                        <li><h5 class="my-2">Nom : {{ demande.nomPatient }}</h5></li>
+                        <li><h5 class="my-2">Prenom : {{ demande.prenomPatient }}</h5></li>
+                        <li><h5 class="my-2">Age : {{ demande.age }}</h5></li>
+
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                         <span class="text-muted text-center">
+                                    <h4 class="my-2 ">Resultat Bilan Générale:</h4></span>
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                            <tr>
+                                <th>Analyse</th>
+                                <th>Resultat</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Taux_pro
+                                </td>
+                                <td>{{ bilan.Taux_pro }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    INR
+                                </td>
+                                <td>{{ bilan.INR }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Creatinine
+                                </td>
+                                <td>{{ bilan.Créatinine}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Acide_Urique
+                                </td>
+                                <td>{{ bio.Acide_Urique }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Temp_cépha
+                                </td>
+                                <td>{{ bilan.Temp_cépha}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Glucose
+                                </td>
+                                <td>{{ bilan.Glucose}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Urée
+                                </td>
+                                <td>{{ bilan.Urée }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Créatinine
+                                </td>
+                                <td>{{ bilan.créatinine }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bilirubine
+                                </td>
+                                <td>{{ bilan.Bilirubine}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Magnésium
+                                </td>
+                                <td>{{ bio.Magnésium}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Calcium
+                                </td>
+                                <td>{{ bilan.Calcium }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    CRP
+                                </td>
+                                <td>{{ bilan.CRP}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    WBC
+                                </td>
+                                <td>{{ bilan.WBC}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    RBC
+                                </td>
+                                <td>{{ blan.RBC}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    HGB
+                                </td>
+                                <td>{{ bilan.HGB}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    HCT
+                                </td>
+                                <td>{{ bilan.HCT }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    MCV
+                                </td>
+                                <td>{{ bilan.MCV}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    MCH
+                                </td>
+                                <td>{{ bilan.MCH}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    MCHC
+                                </td>
+                                <td>{{ bilan.MCHC }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    PLT
+                                </td>
+                                <td>{{ bilan.PLT}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    LYM
+                                </td>
+                                <td>{{ bilan.LYM}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    NEUT
+                                </td>
+                                <td>{{ bilan.NEUT}}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="mb-4 mb-md-2 text-left"><span class="text-muted">
+                                <h5 class="my-2">Demandeur:</h5></span>
+                    <ul class="list list-unstyled mb-0">
+                        <li><h6 class="my-2">le Medecin </h6></li>
+                        <li><h5 class="my-2">{{demande.Nommedecin_demandeur}}
+                            {{demande.Prenommedecin_demandeur}}</h5></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer"><span class="text-muted">SEMANI-BOUDJEDIR 2021</span></div>
+        </div>
+    </div>
+</div>
+
+<div id="content_wrapper">
+    <div id="current_content">
+        <div class="card text-center border  border-info  bg-light mb-3">
+            <div class="card-header bg-transparent border-info"><h1>Service Demande Analyse '{{demande.service}}'</h1>
+            </div>
+            <div class="card-body">
+                <div class="container" style="text-align:center;">
+                    <a class="btn btn-primary  btn-lg btn-block" id="download"><i class="fa fa-download"></i> </span>
+                        PDF </a>
+                    <a class="btn btn-secondary btn-lg btn-block"
+                       href="{% url 'EnvoyerResultatBilanDurgence' bilan.id  %}"><span
+                            class="fa fa-send" style="color:#4f4; btn-block"></span> Envoyer</a>
+                    <a class="btn btn-info btn-lg btn-block " onclick="window.print()"> <span
+                            class="fa fa-print"></span> Imprimer</a>
+                    </h4>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+<script src="{% static 'js/telecharger.js' %}"></script>
+<script src="{% static 'js/dummy.js' %}"></script>
+<script src="{% static 'js/date.js' %}"></script>
+<script>
+    window.onload = function () {
+    document.getElementById("download")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("invoice");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'Laboratoire CHU DOUERA_Resultat.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+</script>
+
+</body>
+
+</html>

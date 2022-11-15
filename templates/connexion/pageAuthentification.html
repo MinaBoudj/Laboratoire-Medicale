@@ -1,0 +1,46 @@
+{% include 'connexion/include.html' %}
+{% include 'connexion/navbar.html' %}
+{% block body %}
+{% load static %}
+
+<body class="main-bg" style="background: url(&quot;{% static 'img/generale.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+<div class="login-container text-c animated flipInX">
+    <div>
+        <h1 class="logo-badge text-whitesmoke"><span class="fa fa-user-circle"></span></h1>
+    </div>
+    <h2 class="text-whitesmoke "><FONT face="Times New Roman">AUTHENTIFICATION</FONT></h2><br>
+    <div class="container-content">
+        <form method="post">
+            {% csrf_token %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                </svg>
+                <div><strong>{{message}}</strong></div>
+            </div>
+            {% endfor %}
+            {% endif%}
+            <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+            <div class="form-group"><input class="form-control" type="password" name="password"
+                                           placeholder="Mot de passe"></div>
+            <div class="form-group">
+                <button class="btn btn-secondary btn-block" type="submit"> Se Connecter</button>
+            </div>
+            <a class="text-darkyellow" href="{% url 'password_reset' %}"><strong>Mot de passe Oublié?</strong></a>
+        </form>
+        <p class="margin-t text-whitesmoke"><small> SEMANI- BOUDJEDIR &copy; 2021</small></p>
+    </div>
+</div>
+
+{% ifequal error "no" %}
+<script type="text/javascript">
+    alert('Vous etes bien connecter..........')
+    window.location = ('{% url 'Profile' %}')
+</script>
+{% endifequal%}
+
+{% endblock %}

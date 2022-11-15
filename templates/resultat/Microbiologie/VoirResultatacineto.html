@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}   
+    {% load static %}
+    
+    
+</head>
+
+<body style="background: url(&quot;{% static 'img/patients.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+   
+<div id="wrapper">
+    {% for group in  request.user.groups.all %}
+    {%  if 'Medecin' == group.name %}
+         {% include 'medecin/navbar_Medecin.html' %}
+       {% else %}
+           {%  if 'Biologiste' == group.name %}
+                  {% include 'biologiste/navbar_biologiste.html' %}
+                {% else %}
+                    {%  if 'Receptionniste' == group.name %}
+                        {% include 'receptionniste/navbar_reception.html' %}    
+                    {% else %}
+                       {% if 'Administrateur' == group.name %}
+                          {% include 'administrateur/include_admin.html' %}  
+                        
+                       {% endif %}      
+                    {% endif %}
+            {% endif %}
+    {% endif %}                
+    {% endfor %} 
+   
+        <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="color: black;"></i></a>
+
+           
+            <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                        <form class="custom-form" method="post" style="margin-top: 0px;background-color: rgba(0,0,0,0.05);">
+                            {% csrf_token %} 
+                            <h1 style="color: black;">Résultat Groupage Sanguin</h1>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Nom Patient</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{demande.nomPatient}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Prénom Patient</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{demande.prenomPatient}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="email-input-field" style="color: black;">Age </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="number" value="{{demande.age}}" readonly>
+                                </div>
+                            </div>
+                          
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Ticarcilline</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Ticarcilline}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;">Piperacilline</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <textarea class="form-control" value="{{acineto.Piperacilline}}" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Ticar_Acide </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Ticar_Acide}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Ceftazidime </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Ceftazidime}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Imipéneme </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Imipéneme}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Amikacine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Amikacine}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Gentamicine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Gentamicine}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Tobramycine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Tobramycine}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Netilmicine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Netilmicine}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Ciprof </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Ciprof}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Lévofloxamine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Lévofloxamine}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Tetracy_doxy </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Tetracy_doxy}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Trime_sulfam </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Trime_sulfam}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Colistine </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Colistine}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" style="color: black;"> Praticie </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{acineto.Praticie}}" readonly>
+                                </div>
+                            </div>
+                           
+                            
+                            <div class="input-box">
+                                <a class='btn btn-info' href="">Imprimer</a>
+                                <a class='btn btn-info' href="">Envoyer Par email</a>
+                            </div>
+                            
+                 </form>
+                            
+  
+                </div>
+           
+               </div>
+        </div>
+</div>
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a href="{% url 'pageAdministrateur' %}"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Acceuil</a>
+        <a href="{% url 'ajouterMedecin' %}"><i class="fa fa-user-plus fa-fw" aria-hidden="true" ></i>&nbsp; +Médecin</a>
+        <a href="{% url 'listeMedecin' %}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp; Liste Médecin</a>
+        <a href="{% url 'ajouterReceptionniste' %}"><i class="fa fa-user-plus fa-fw" aria-hidden="true" ></i>&nbsp; +Réceptionniste</a>
+        <a href="{% url 'listeReceptionniste' %}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp; Liste Réceptionniste</a>
+        <a href="{% url 'ajouterBiologiste' %}"><i class="fa fa-user-plus fa-fw" aria-hidden="true" ></i>&nbsp; +Biologiste</a>
+        <a href="{% url 'listeBiologiste' %}"> <i class="fa fa-list" aria-hidden="true"></i>&nbsp; Liste Biologiste</a>
+        <a  href="{% url 'listePatient' %}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Liste Patient</a>
+        <a href="{% url 'listeDemande' %}">Gestion Analyse</a>
+        <a href="{% url 'Resultats' %}">Gestion Résultat</a>
+        <a  href="{% url 'Statistique-Afficher' %}"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Statistique</a>
+
+        <a href="{% url 'deconnexionAdmin' %}"><i class="fa fa-sign-out-alt fa-fw" aria-hidden="true"></i>&nbsp; Se Déconnecter</a>
+    </ul>
+</div>

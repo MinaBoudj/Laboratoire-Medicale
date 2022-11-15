@@ -1,0 +1,20 @@
+{% load static %}
+<nav class="navbar navbar-light navbar-expand-md sticky-top" style="background-color:#0000CD;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand text-center" href="{% url 'PageAuthentification' %}" style="margin: 0px 0px;color:#000000;"><h5>LABORATOIRE CHU</h5></a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li></li>
+        </ul>
+        <form class="nav navbar-nav text-light ml-auto">
+            <div class="nav-item" role="presentation">
+                <a class=" nav-link " href="{% url 'Connexion_Admin' %}">
+                    <FONT color="Goldenro" face="Verdana">ESPACE ADMINISTRATEUR</FONT></a></div>
+        </form>
+    </div>
+
+</nav>

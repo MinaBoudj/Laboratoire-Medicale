@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="{% static 'js/datatables.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+</head>
+<body style="background: url(&quot;{% static 'img/Statis.jpg' %}&quot;)
+           no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+            background-size: cover;o-background-size: cover;">
+
+
+<div id="wrapper">
+    {% for group in request.user.groups.all %}
+    {% if 'Medecin' == group.name %}
+    {% include 'medecin/navbar_Medecin.html' %}
+    {% else %}
+    {% if 'Biologiste' == group.name %}
+    {% include 'biologiste/navbar_biologiste.html' %}
+    {% else %}
+    {% if 'Receptionniste' == group.name %}
+    {% include 'receptionniste/navbar_reception.html' %}
+    {% else %}
+    {% if 'Administrateur' == group.name %}
+    {% include 'administrateur/include_admin.html' %}
+
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid"><a class="btn btn-secondary" role="button" id="menu-toggle" href="#menu-toggle"><i
+                class="fa fa-bars" style="color: black;"></i></a>
+            <div class="container">
+                <hr>
+                {% csrf_token %}
+                <div class=" text-center">
+                    <a href="{% url 'stat' %}" class="btn btn-primary btn-lg " role="button"> Par Periode</a>
+                    <a href="{% url 'ServiceStat' %}" class="btn btn-secondary btn-lg " role="button">Service</a>
+                    <a href="{% url 'BiochimieStat' %}" class="btn btn-success btn-lg " role="button"> Unité
+                        Biochimie </a>
+                    <a href="{% url 'ParasitologieStat' %}" class="btn btn-info btn-lg " role="button"> Unité
+                        Parasitologie</a>
+                    <a href="{% url 'MicrobiologieStat' %}" class="btn btn-dark btn-lg " role="button"> Unité
+                        Microbiologie</a>
+                    <a href="{% url 'HemobiologieStat' %}" class="btn btn-warning btn-lg " role="button"> Unité
+                        Hémobiologie</a>
+                </div>
+                <hr>
+                <div class="bg-light border border-primary">
+                    <canvas id="myChart3" width="20%" height="10%"></canvas>
+                            <script>
+                    var ctx = document.getElementById('myChart3').getContext('2d');
+                    var myChart1 = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [ 'Stapylocoque','Entérobactéries','Pseudomonas','Acinetobacter'],
+                    datasets: [{
+                        label: 'Resultat Microbiologie',
+                        data: [ '{{s}}','{{e}}','{{p}}','{{a}}'],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                                borderWidth: 1
+                    }]
+                        },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+
+                            }]
+                        }
+
+                    }
+                    });
+
+
+
+
+
+
+
+                            </script>
+
+                    </div>
+                   <hr/>
+                <a href="Statistique-Afficher" class="btn btn-dark btn-lg">Revenir</a>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+</div>
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+<!--<script src="{% static 'js/jquery.min.js' %}"></script>-->
+<!--<script src="{% static 'js/script.js' %}"></script>-->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+<script src="{% static 'js/table.js' %}"></script>
+</body>
+</html>

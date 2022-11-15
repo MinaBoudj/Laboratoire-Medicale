@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="  {% static 'css/pdf.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'css/stylemedia.css' %}"/>
+
+</head>
+<body style="background: url(&quot;{% static 'img/result.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+<div class="row">
+    <div class="col-md-12" id="dummy_content">
+        <div class="card  border border-danger mb-3" id="invoice">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h4 class="invoice-color text-center mb-2 mt-md-2">Laboratoire CHU DOUERA</h4>
+                <h4><input id="date-picker" readonly></h4>
+            </div>
+            <div class="card-body ">
+                <div class="col-sm-6">
+                    <div class="mb-4 pull-left">
+                        <h6 class="card-title text-primary">Informations date: </h6>
+
+                        <ul class="list list-unstyled mb-0 text-left">
+                            <li>Date Demande Analyse</li>
+                            <li>Date Resultat</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-4 ">
+                        <div class="text-sm-right">
+                            <h6 class="card-title text-center text-primary">voila: </h6>
+
+                            <ul class="list list-unstyled mb-0">
+
+                                <li>Date: <span
+                                        class="font-weight-semibold">{{demande.date_ajout_demande}}</span>
+                                </li>
+                                <li>Due date: <span
+                                        class="font-weight-semibold">{{s.date_ajout_resultat}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <ul class="list list-unstyled mb-0 ">
+                        <li><h5 class="my-2">Nom : {{ demande.nomPatient }}</h5></li>
+                        <li><h5 class="my-2">Prenom : {{ demande.prenomPatient }}</h5></li>
+                        <li><h5 class="my-2">Age : {{ demande.age }}</h5></li>
+
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                         <span class="text-muted text-center">
+                                    <h4 class="my-2 ">Resultat Stapylocoque :</h4></span>
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                            <tr>
+                                <th>Analyse</th>
+                                <th>Resultat</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Penicilline
+                                </td>
+                                <td>{{ s.Penicilline }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Oxacilline
+                                </td>
+                                <td>{{ s.Oxacilline }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Cefoxitine
+                                </td>
+                                <td>{{ s.Cefoxitine}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Amikacine
+                                </td>
+                                <td>{{ s.Amikacine }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Gentamicine
+                                </td>
+                                <td>{{ s.Gentamicine }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Kanamycine
+                                </td>
+                                <td>{{ s.Kanamycine}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Eryth_Azith
+                                </td>
+                                <td>{{ s.Eryth_Azith }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Clind_linc
+                                </td>
+                                <td>{{ s.Clind_linc }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Prist_Quin_dal
+                                </td>
+                                <td>{{ entbac.Prist_Quin_dal}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Ofloxacine
+                                </td>
+                                <td>{{ s.Ofloxacine}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Ciprofloxacine
+                                </td>
+                                <td>{{ s.Ciprofloxacine }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Levofloxacine
+                                </td>
+                                <td>{{ s.Lévofloxacine}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Chloram
+                                </td>
+                                <td>{{ s.Chloram}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Vancomycine
+                                </td>
+                                <td>{{ s.Vancomycine}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rifampicine
+                                </td>
+                                <td>{{ s.Rifampicine}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Trime_sulfam
+                                </td>
+                                <td>{{ s.Trime_sulfam }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Tetracy_doxy
+                                </td>
+                                <td>{{ s. Tetracy_doxy}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Acidefucidique
+                                </td>
+                                <td>{{ s.Acidefucidique}}</td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="mb-4 mb-md-2 text-left"><span class="text-muted">
+                                <h5 class="my-2">Demandeur:</h5></span>
+                    <ul class="list list-unstyled mb-0">
+                        <li><h6 class="my-2">le Medecin </h6></li>
+                        <li><h5 class="my-2">{{demande.Nommedecin_demandeur}}
+                            {{demande.Prenommedecin_demandeur}}</h5></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer"><span class="text-muted">SEMANI-BOUDJEDIR 2021</span></div>
+        </div>
+    </div>
+</div>
+
+<div id="content_wrapper">
+    <div id="current_content">
+        <div class="card text-center border  border-info  bg-light mb-3">
+            <div class="card-header bg-transparent border-info"><h1>Service Demande Analyse '{{demande.service}}'</h1>
+            </div>
+            <div class="card-body">
+                <div class="container" style="text-align:center;">
+                    <a class="btn btn-primary  btn-lg btn-block" id="download"><i class="fa fa-download"></i> </span>
+                        PDF </a>
+                    <a class="btn btn-secondary btn-lg btn-block"
+                       href="{% url 'EnvoyerResultatStapylocoque' s.id  %}"><span
+                            class="fa fa-send" style="color:#4f4; btn-block"></span> Envoyer</a>
+                    <a class="btn btn-info btn-lg btn-block " onclick="window.print()"> <span
+                            class="fa fa-print"></span> Imprimer</a>
+                    </h4>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+
+<script src="{% static 'js/telecharger.js' %}"></script>
+<script src="{% static 'js/dummy.js' %}"></script>
+<script src="{% static 'js/date.js' %}"></script>
+<script src="  {% static 'js/pdf.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+
+</body>
+
+</html>

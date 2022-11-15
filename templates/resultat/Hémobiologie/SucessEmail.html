@@ -1,0 +1,95 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="  {% static 'css/pdf.css' %}"/>
+    <script src="  {% static 'js/pdf.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <style>
+      @media screen {
+      #dummy_content {
+        display:none; /* hide dummy content when not printing */
+                   }
+       }
+         @media print {
+        #dummy_content {
+        display:block; /* show dummy content when printing */
+         }
+         #content_wrapper {
+        display:none; /* hide original content when printing */
+        }
+}
+
+
+
+
+
+
+
+    </style>
+</head>
+<body style="background: url(&quot;{% static 'img/sucess.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;">
+<br>
+<hr>
+<div class="info">
+<div class="container" style="text-align:center;">
+<h1>Envoyer avec succès le resulat  '{{groupe.id}}' </h1>
+<br>
+<h3>Toutes nos félicitations! Vous avez envoyé Le resultat  des analyses {{id}} avec succès.</h3>
+</div>
+</div>
+<hr>
+
+
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+<script>
+    window.onload = function () {
+    document.getElementById("download")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("invoice");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'Laboratoire CHU DOUERA-Resulat.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+</script>
+<script>
+        var dummyContent = document.getElementById("dummy_content");
+        function beforePrint() {
+              var iFrame = document.getElementById("myIframe");
+              dummyContent.innerHTML = iFrame.contentWindow.document.body.innerHTML; //populate the dummy content (printable) with the iframe content
+        }
+
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && e.keyCode == 80) {
+                beforePrint();
+            }
+        }
+
+
+</script>
+
+</body>
+
+</html>

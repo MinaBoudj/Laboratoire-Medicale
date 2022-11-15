@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/datatables.js' %}"></script>    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+    <title></title>
+</head>
+<body style="background: url(&quot;{% static 'img/patients.jpg' %}&quot;)
+ no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+ background-size: cover;o-background-size: cover;"> 
+  
+
+         
+        
+  <div id="wrapper">
+    {% for group in  request.user.groups.all %}
+    {%  if 'Medecin' == group.name %}
+         {% include 'medecin/navbar_Medecin.html' %}
+       {% else %}
+           {%  if 'Biologiste' == group.name %}
+                  {% include 'biologiste/navbar_biologiste.html' %}
+                {% else %}
+                    {%  if 'Receptionniste' == group.name %}
+                        {% include 'receptionniste/navbar_reception.html' %}    
+                    {% else %}
+                       {% if 'Administrateur' == group.name %}
+                          {% include 'administrateur/include_admin.html' %}  
+                        
+                       {% endif %}      
+                    {% endif %}
+            {% endif %}
+    {% endif %}                
+    {% endfor %} 
+ 
+    
+    <div class="page-content-wrapper">
+        <div class="container-fluid">
+            <a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle">
+                <i class="fa fa-bars" style="color: black;"></i></a>
+            <h2 class="text-center">Tous Les Résultats de coproparasitologie</h2>
+            <section id="team" class="pb-5">
+                <div class="container">
+                   <table class="table" id="example"><!--table-hover-->
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>ID Demande</th>                              
+                                <th>Resultat</th>
+                                <th>Macroscopie</th>
+                                <th>Microscopie</th>
+                                <th>Etat_frais</th>
+                                <th>Ritchie</th>
+                                <th>Kato_willis</th>
+                                <th>Scotch_test</th>
+                                <th>Autres</th>
+                               
+                                {% for group in  request.user.groups.all %}
+                                {%  if 'Administrateur' == group.name %}                       
+                                    <th>Supprimer</th> 
+                                    <th>Modifier</th>                              
+                                    {% else %}
+                                    {% if 'Receptionniste' == group.name %}
+                                    <th></th>
+                                    {% else %}
+                                    <th>Modifier</th>
+                                    {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                <th>Afficher</th>
+                                
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in copro %}
+                            <tr style="color: black;">
+                                <td><a href="{% url 'ResultatCopro' i.id_demande %}">{{ i.id }}</a></td>
+                                <td><a href="{% url 'detailDemande' i.id_demande %}">{{ i.id_demande }}</a></td>                                                           
+                                <td>{{ i.Resultat }}</td>
+                                <td>{{ i.Macroscopie }}</td>
+                                <td>{{ i.Microscopie }}</td>
+                                <td>{{ i.Etat_frais }}</td>
+                                <td>{{ i.Ritchie }}</td>
+                                <td>{{ i.Kato_willis }}</td>
+                                <td>{{ i.Scotch_test }}</td>
+                                <td>{{ i.Autres }}</td>
+                                
+
+                                {% for group in  request.user.groups.all %}
+                                {%  if 'Administrateur' == group.name %}                       
+                                    <td><a href="{% url 'supprimerCopro' i.id %}"class='btn btn-sm btn-danger'><i class="fas fa-trash"></i></a></td>
+                                    <td><a href="{% url 'modifierCopro' i.id %}" class='btn btn-info'>Modifier</a></td>
+                                {% else %}
+                                    {% if 'Receptionniste' == group.name %}
+                                    <td></td>
+                                    {% else %}
+                                    <td><a href="{% url 'modifierCopro' i.id %}" class='btn btn-info'>Modifier</a></td>
+                                    {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                 <td><a class="btn btn-primary  btn-lg" href="{% url 'AfficherResultatCopro' i.id  %}" ><i class="fa fa-download"></i> </span>
+                                <span class="fa fa-send"  style="color:#4f4;"></span>     <span class="fa fa-print"></span></a>
+                                 </td>
+                                    
+                            </tr>
+                            {% endfor %} 
+                        </tbody> 
+                        
+                    </table>
+                   
+                    
+
+                </div>               
+            </section>
+            
+        </div>
+    </div>
+</div>
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+<!--<script src="{% static 'js/jquery.min.js' %}"></script>-->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+</body>
+</html>

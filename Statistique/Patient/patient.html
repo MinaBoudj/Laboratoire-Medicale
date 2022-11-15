@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    {% include 'connexion/include.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="{% static 'js/datatables.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+</head>
+<body style="background: url(&quot;{% static 'img/Statis.jpg' %}&quot;)
+           no-repeat center center fixed;webkit-background-size: cover;moz-background-size: cover;
+            background-size: cover;o-background-size: cover;">
+
+
+<div id="wrapper">
+    {% for group in request.user.groups.all %}
+    {% if 'Medecin' == group.name %}
+    {% include 'medecin/navbar_Medecin.html' %}
+    {% else %}
+    {% if 'Biologiste' == group.name %}
+    {% include 'biologiste/navbar_biologiste.html' %}
+    {% else %}
+    {% if 'Receptionniste' == group.name %}
+    {% include 'receptionniste/navbar_reception.html' %}
+    {% else %}
+    {% if 'Administrateur' == group.name %}
+    {% include 'administrateur/include_admin.html' %}
+
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid"><a class="btn btn-secondary " role="button" id="menu-toggle" href="#menu-toggle"><i
+                class="fa fa-bars" style="color: black;"></i></a>
+
+            <div class="container">
+                 <hr>
+                {% csrf_token %}
+                <div class=" text-center">
+                    <a href="{% url 'stat' %}" class="btn btn-primary btn-lg " role="button"> Par Periode</a>
+                    <a href="{% url 'ServiceStat' %}" class="btn btn-secondary btn-lg " role="button">Service</a>
+                    <a href="{% url 'BiochimieStat' %}" class="btn btn-success btn-lg " role="button"> Unité
+                        Biochimie </a>
+                    <a href="{% url 'ParasitologieStat' %}" class="btn btn-info btn-lg " role="button"> Unité
+                        Parasitologie</a>
+                    <a href="{% url 'MicrobiologieStat' %}" class="btn btn-dark btn-lg " role="button"> Unité
+                        Microbiologie</a>
+                    <a href="{% url 'HemobiologieStat' %}" class="btn btn-warning btn-lg " role="button"> Unité
+                        Hémobiologie</a>
+                </div>
+              <hr>
+
+                  <div class="bg-light border border-primary">
+                                 <canvas id="myChart" width="20%" height="10%" ></canvas>
+                                 <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart1 = new Chart(ctx, {
+
+                        type: 'bar',
+                        data: {
+                            labels: ['0-5','6-10','11-15','15-20','21-25','26-30','31-35','36-40','45-50','51-60','61-70','71-80','81-plus'  ],
+                    datasets: [
+                    {
+                         label: 'Service POA',
+                        data: [ '{{result1}}','{{result2}}','{{result3}}','{{result4}}',
+                        '{{result5}}','{{result6}}','{{result7}}','{{result8}}','{{result9}}','{{result10}}',
+                        '{{result11}}','{{result2}}','{{result13}}','{{result14}}'],
+                           tension: 0.4,
+                              backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+
+                        ],
+                            borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            ],
+                                borderWidth: 1
+
+                    },
+                    {
+                        label: ' Service POB',
+                        data: [ '{{Sresult1}}','{{Sresult2}}','{{Sresult3}}','{{Sresult4}}',
+                        '{{Sresult5}}','{{Sresult6}}','{{Sresult7}}','{{Sresult8}}','{{Sresult9}}','{{Sresult10}}',
+                        '{{Sresult11}}','{{Sresult2}}','{{Sresult13}}','{{Sresult14}}'],
+                           tension: 0.4,
+                       backgroundColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+
+                        ],
+                            borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            ],
+                                borderWidth: 1
+                    },
+                    {
+                         label: ' Service COA',
+                        data: [ '{{aSresult1}}','{{aSresult2}}','{{aSresult3}}','{{aSresult4}}',
+                        '{{aSresult5}}','{{aSresult6}}','{{aSresult7}}','{{aSresult8}}','{{aSresult9}}','{{aSresult10}}',
+                        '{{aSresult11}}','{{aSresult2}}','{{aSresult13}}','{{aSresult14}}'],
+                           tension: 0.4,
+                              backgroundColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+
+                        ],
+                            borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            ],
+                                borderWidth: 1
+
+                    },
+                    {
+                        label: ' Service Externe',
+                        data: [ '{{eSresult1}}','{{eSresult2}}','{{eSresult3}}','{{eSresult4}}',
+                        '{{eSresult5}}','{{eSresult6}}','{{eSresult7}}','{{eSresult8}}','{{eSresult9}}','{{eSresult10}}',
+                        '{{eSresult11}}','{{eSresult2}}','{{eSresult13}}','{{eSresult14}}'],
+                           tension: 0.4,
+                       backgroundColor: [
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+
+                        ],
+                            borderColor: [
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            ],
+                                borderWidth: 1
+                    },
+
+                     ]
+                        },
+                    options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Floating Bar Chart'
+      }
+    }
+  }
+
+                    });
+
+
+
+
+
+
+
+
+                                </script>
+
+                  </div>
+                <hr>
+                <table id="dt-filter-select" class="table table-dark" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Email</th>
+                        <th class="th-sm">Genre</th>
+                        <th class="th-sm">Date de Naissance</th>
+                        <th class="th-sm">Num Tel</th>
+                        <th class="th-sm">Nom Patient</th>
+                        <th class="th-sm">Prenom Patient</th>
+                        <th class="th-sm">Groupe Sanguin</th>
+                        <th class="th-sm">adresse</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in listePatient %}
+                    <tr style="background:black">
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.genre }}</td>
+                        <td>{{ i.dateNaissance }}</td>
+                        <td>{{ i.numTel}}</td>
+                        <td>{{ i.nom }}</td>
+                        <td>{{ i.prenom }}</td>
+                        <td>{{ i.groupeSanguin }}</td>
+                        <td>{{ i.adresse }}</td>
+
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Email</th>
+                        <th>Genre</th>
+                        <th>Date de Naissance</th>
+                        <th>Num Tel</th>
+                        <th>Nom Patient</th>
+                        <th>Prenom Patient</th>
+                        <th>Groupe Sanguin</th>
+                        <th>adresse</th>
+
+                    </tr>
+                    </tfoot>
+                </table>
+                <hr>
+
+
+                <a href="Statistique-Afficher" class="btn btn-dark btn-lg">Revenir</a>
+
+
+            </div>
+            <hr>
+            <hr>
+        </div>
+
+
+    </div>
+
+</div>
+</div>
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span>
+</div>
+<!--<script src="{% static 'js/jquery.min.js' %}"></script>-->
+<!--<script src="{% static 'js/script.js' %}"></script>-->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+<script src="{% static 'js/table.js' %}"></script>
+</body>
+</html>
